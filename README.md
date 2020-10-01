@@ -5,4 +5,4 @@ The playbook advise to take the snapshot of standby/slave nodes first. Another r
 
 The playbook check the VM status prior to shutdown and creating the snapshot, once user has chosen the instance. The playbook introduce appropriated pause to get the task completed before jumping to next task. The instance is brought back to service after snapshot creation, the last task of this playbook.
 
-The playbook [Set environment variables using the OpenStack RC file]https://docs.openstack.org/ocata/user-guide/common/cli-set-environment-variables-using-openstack-rc.html) each time issuing nova command
+The playbook [Set environment variables using the OpenStack RC file]https://docs.openstack.org/ocata/user-guide/common/cli-set-environment-variables-using-openstack-rc.html)! each time issuing nova command
