@@ -1,2 +1,54 @@
 ---
-# Coming soon
+- hosts: os
+  gather_facts: false
+
+  tasks:
+    - name: Wait!...  checking the instances from nova
+      shell: . ~/BM-SC-openrc.sh;nova list|awk '{print $4}'|grep BM-SC string
+      register: result2
+
+    - name: Here is the list of BM-SC instances!
+      debug:
+        msg: "{{result2.stdout_lines}}"
+
+    - name: Copy the instance from list above, you want to take snapshot of
+      pause:
+        prompt: Paste the instance name without quotations please
+      register: instance
+
+    - name: Wait!... removing the facts, pause added some info to your input.
+      set_fact:
+        my_instance: "{{ instance.user_input }}"
+
+    - name: Wait!... checking the instance satus!
+      shell: . ~/BM-SC-openrc.sh; nova list|grep {{my_instance}}|awk '{print $6}'
+      register: result3
+
+    - name: Here is instance status prior to shutdown
+      debug:
+        msg: "{{my_instance}} has '{{result3.stdout}}' status in Openstack"
+
+    - name: Shutting the instance now ... 
+      shell: . ~/BM-SC-openrc.sh; nova stop {{my_instance}}
+
+    - name: Wait!... let the instance cool down completely 
+      pause:
+        seconds: 30
+      
+    - name: Behold!... creating the snapshot now!
+      shell: . ~/BM-SC-openrc.sh; nova image-create {{my_instance}} "{{my_instance}}Snapshot-{{TS}}"
+
+    - name: Wait!... for the snapshot creation and uploading to Glance
+      pause:
+        seconds: 120
+
+    - name: Checking Glance for the snapshot 
+      shell: . ~/BM-SC-openrc.sh; openstack image list| grep "{{my_instance}}Snapshot-{{TS}}"
+      register: result4
+
+    - name: Snapshot is ready, here is the result!
+      debug:
+        msg: "{{result4.stdout_lines}}"
+
+    - name: Time to bring the instace back up! Goodbye!
+      shell: . ~/BM-SC-openrc.sh; nova start {{my_instance}}
