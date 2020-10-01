@@ -3,7 +3,7 @@ This playbook provide nova list on instances filtered as per grep on [BM-SC](htt
 
 Note: It's one time job to figure what is commont string which amongst all instances of BM-SC VNF. Replace the 'BM-SC string' with actual common string for nova list to come up with only desired VMs.
 
-The playbook advise to take the snapshot of standby/slave nodes first. Another repository 'BM-SC_VNF-Status' has a playbook to figure-out Master DB and Active CP/UP nodes
+The playbook advises to take the snapshot of standby/slave nodes first. Another repository 'BM-SC_VNF-Status' has a playbook to figure-out Master DB and Active CP/UP nodes
 
 The playbook check the VM status prior to shutdown and creating the snapshot, once user has chosen the instance. The playbook introduces appropriate pause time to get the task completed before jumping to the next task. The instance is brought back to service after snapshot creation, the last task in this playbook.
 
