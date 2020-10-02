@@ -7,7 +7,7 @@ The playbook advises to take the snapshot of standby/slave nodes first. Another 
 
 The playbook check the VM status prior to shutdown and creating the snapshot, once user has chosen the instance. The playbook introduces appropriate pause time to get the task completed before jumping to the next task. The instance is brought back to service after snapshot creation, the last task in this playbook.
 
-The playbook [Set environment variables using the OpenStack RC file](https://docs.openstack.org/ocata/user-guide/common/cli-set-environment-variables-using-openstack-rc.html) each time nova command is issued.
+The playbook [Set environment variables using the OpenStack RC file](https://docs.openstack.org/ocata/user-guide/common/cli-set-environment-variables-using-openstack-rc.html) each time nova command is issued. Make sure RC file is exporting username and password for Openstack. # any echo or read line asking or prompting for input.
 
 Hostname, ansible_connection=ssh, ansible_user=user and ansible_ssh_pass=password should be in the inventory/hosts file for playbook to use. I didn't use ansible_ssh_pass=password but introduced ansible_ssh_private_key_file=.ssh/id_rsa instead as I was authorized under .ssh/authorized_keys in home dir. 
 And this dir was also my home for Ansible control node
