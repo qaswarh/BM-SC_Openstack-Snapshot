@@ -9,4 +9,4 @@ The playbook check the VM status prior to shutdown and creating the snapshot, on
 
 The playbook [Set environment variables using the OpenStack RC file](https://docs.openstack.org/ocata/user-guide/common/cli-set-environment-variables-using-openstack-rc.html) each time nova command is issued.
 
-Hostname where Ansible control node will connect using ansible_connection=ssh, ansible_user=user and ansible_ssh_pass=password information should be in the inventory/hosts. I introduced ansible_ssh_private_key_file=.ssh/id_rsa in my ~ as I'm authorized in .ssh/authorized_keys in my home dir which is also my home dir of Ansible control node
+Hostname where Ansible control node will connect using ansible_connection=ssh, ansible_user=user and ansible_ssh_pass=password information should be in the inventory/hosts. I introduced ansible_ssh_private_key_file=.ssh/id_rsa in my ~ as I'm authorized in .ssh/authorized_keys in home dir which is also home dir of Ansible control node
